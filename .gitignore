@@ -2,8 +2,7 @@
 database.db
 .DS_Store
 .idea
-static/posts
-!static/posts/.gitkeep
+
 
 
 # Byte-compiled / optimized / DLL files
