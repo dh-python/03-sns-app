@@ -23,13 +23,14 @@ def index():
     # 一覧を取得.
     conn = sqlite3.connect(dbname)
     c = conn.cursor()
-    sql = "SELECT filename, body FROM posts"
+    sql = "SELECT filename, body, created_at FROM posts"
     rows = c.execute(sql)
     posts = []
     for row in rows:
         post = {
-            "filename" : row[0],
-            "body" : row[1]
+            "filename": row[0],
+            "body": row[1],
+            "created_at": row[2]
         }
         posts.append(post)
     conn.commit()
@@ -37,13 +38,12 @@ def index():
     return render_template("index.html", posts=posts)
 
 
-@app.route("/post", methods=["GET", "POST"])
+@app.route("/post", methods=["POST"])
 def post():
     if request.method == "POST":
         body = request.form.get("body")
         file = request.files.get("file")
         if not body or not file:
-            # TODO flashしたデータはどのように扱うの？
             flash("本文とファイルを設定してください。")
             return redirect("/")
         # 画像を保存.
