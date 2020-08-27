@@ -18,6 +18,19 @@
       <!--サイトタイトル-->
       <h1>PythonでSNS App</h1>
 
+      <!--エラー表示 -->
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="alert alert-danger">
+            <ul class=flashes>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+      {% endwith %}
+
       <!--投稿フォーム-->
       <div class="form">
         <h2>投稿フォーム</h2>
